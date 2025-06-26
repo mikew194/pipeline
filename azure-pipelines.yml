@@ -3,7 +3,7 @@ trigger:
 
 variables:
   # Azure Resource Manager connection created during pipeline creation
-  azureServiceConnectionId: "50df3e64-325d-425f-996b-975ea2e7e057"
+  azureServiceConnectionId: "d5edb66d-1e3d-45ec-b380-267eb57da0cc"
 
   # Web app name
   webAppName: "my-first-flsk-app"
@@ -97,7 +97,10 @@ stages:
 
             # The displayName shows in the pipeline UI when a build runs
             displayName: "Install dependencies on build agent"
-
+          - script: |
+              echo "Waiting for the app to warm up..."
+              sleep 180
+            displayName: "Wait for deployment to stabilize"
           - script: |
               pytest -rA
             displayName: "Run tests"

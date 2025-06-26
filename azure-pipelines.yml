@@ -78,3 +78,32 @@ stages:
                     azureSubscription: $(azureServiceConnectionId)
                     appName: $(webAppName)
                     package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
+  - stage: Test
+    displayName: Test Site
+    jobs:
+      - job: RunTests
+        pool:
+          vmImage: $(vmImageName)
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+            versionSpec: "$(pythonVersion)"
+            displayName: "Use Python $(pythonVersion)"
+          - script: |
+              python -m venv .env
+              source .env/bin/activate
+              pip install setuptools
+              pip install -r requirements.txt
+
+            # The displayName shows in the pipeline UI when a build runs
+            displayName: "Install dependencies on build agent"
+
+          - script: |
+              pytest -rA
+            displayName: "Run tests"
+
+          - script: |
+              echo Deleting .env
+              deactivate
+              rm -rf .env
+            displayName: "Remove .env before zip"

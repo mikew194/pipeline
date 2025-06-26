@@ -8,7 +8,8 @@ def home():
 
 @app.route("/about/")
 def about():
-    return render_template("about.html")
+    current_date = datetime.now()
+    return render_template("about.html", current_date=current_date)
 
 @app.route("/contact/")
 def contact():

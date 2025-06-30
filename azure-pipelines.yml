@@ -1,24 +1,6 @@
 trigger:
   - main
 
-variables:
-  # Azure Resource Manager connection created during pipeline creation
-  azureServiceConnectionId: "d5edb66d-1e3d-45ec-b380-267eb57da0cc"
-
-  # Web app name
-  webAppName: "my-first-flsk-app"
-
-  # Agent VM image name
-  vmImageName: "ubuntu-latest"
-
-  # Environment name
-  environmentName: "my-first-flsk-app-environment"
-
-  # Project root folder. Point to the folder containing manage.py file.
-  projectRoot: $(System.DefaultWorkingDirectory)
-
-  pythonVersion: "3.11"
-
 stages:
   - stage: Build
     displayName: Build stage

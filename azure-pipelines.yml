@@ -1,6 +1,5 @@
 trigger:
   - main
-
 stages:
   - stage: Build
     displayName: Build stage

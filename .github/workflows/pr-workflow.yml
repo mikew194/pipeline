@@ -1,0 +1,11 @@
+name: PR Workflow
+    on:
+      pull_request:
+        types: [opened, synchronize, reopened] # Triggers on PR open, new commits, or reopening
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v4 # Checkout the code
+          - name: Run a script
+            run: echo "This workflow 101 runs on every pull request!"
